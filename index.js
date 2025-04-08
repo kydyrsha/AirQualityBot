@@ -18,7 +18,7 @@ const AQI_LEVELS = [
 
 async function getAirQualityMessage() {
     try {
-        const response = await axios.get("http://api.airvisual.com/v2/city", {
+        const response = await axios.get("https://api.airvisual.com/v2/city", {
             params: {
                 city: "Almaty",
                 state: "Almaty",
@@ -32,7 +32,11 @@ async function getAirQualityMessage() {
 
         return `🌫 AQI в Алматы: ${aqi}\n${level.emoji} ${level.status}\n${getAdvice(aqi)}`;
     } catch (error) {
-        console.error("Ошибка при получении AQI:", error);
+        if (error.response) {
+            console.error("Ошибка от API:", JSON.stringify(error.response.data, null, 2));
+        } else {
+            console.error("Ошибка при получении AQI:", error.message);
+        }
         return "❌ Не удалось получить данные о воздухе.";
     }
 }
