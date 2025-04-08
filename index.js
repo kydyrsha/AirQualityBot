@@ -18,7 +18,7 @@ const AQI_LEVELS = [
 
 async function getAirQualityMessage() {
     try {
-        const response = await axios.get("https://api.airvisual.com/v2/city", {
+        const response = await axios.get("https://api.airvisual.com/v2/cities", {
             params: {
                 city: "Almaty",
                 state: "Almaty Qalasy",
